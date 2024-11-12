@@ -2,9 +2,11 @@ const express = require('express');
 const app = express();
 const path = require('node:path');
 
+const indexRouter = require('./routes/indexRouter');
 const categoriesRouter = require('./routes/categoriesRouter');
 const itemsRouter = require('./routes/itemsRouter');
 
+app.use('/', indexRouter);
 app.use('/category', categoriesRouter);
 app.use('/item', itemsRouter);
 
