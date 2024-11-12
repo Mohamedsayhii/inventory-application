@@ -3,8 +3,10 @@ const app = express();
 const path = require('node:path');
 
 const categoriesRouter = require('./routes/categoriesRouter');
+const itemsRouter = require('./routes/itemsRouter');
 
 app.use('/category', categoriesRouter);
+app.use('/item', itemsRouter);
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
