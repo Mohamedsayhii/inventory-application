@@ -2,7 +2,7 @@ const db = require('../database/queries');
 
 async function getCategories(req, res) {
 	const categories = db.getAllCategories();
-	res.render('category', { categories: categories });
+	res.render('categories', { categories: categories });
 }
 
 async function createCategoryGet(req, res) {
@@ -12,7 +12,7 @@ async function createCategoryGet(req, res) {
 async function createCategoryPost(req, res) {
 	const { categoryName } = req.body;
 	await db.insertCategory(categoryName);
-	res.redirect('/category');
+	res.redirect('/categories');
 }
 
 module.exports = { getCategories, createCategoryGet, createCategoryPost };

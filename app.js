@@ -7,8 +7,8 @@ const categoriesRouter = require('./routes/categoriesRouter');
 const itemsRouter = require('./routes/itemsRouter');
 
 app.use('/', indexRouter);
-app.use('/category', categoriesRouter);
-app.use('/item', itemsRouter);
+app.use('/categories', categoriesRouter);
+app.use('/items', itemsRouter);
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));

@@ -2,7 +2,7 @@ const db = require('../database/queries');
 
 async function getItems(req, res) {
 	const items = await db.getAllItems();
-	res.render('item', { items: items });
+	res.render('items', { items: items });
 }
 
 async function createItemGet(req, res) {
@@ -12,7 +12,7 @@ async function createItemGet(req, res) {
 async function createItemPost(req, res) {
 	const { name, price, categoryName } = req.body;
 	await db.insertItem(name, price, categoryName);
-	res.redirect('/item');
+	res.redirect('/items');
 }
 
 module.exports = { getItems, createItemGet, createItemPost };
