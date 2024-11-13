@@ -8,9 +8,9 @@ CREATE TABLE IF NOT EXISTS categories (
 
 INSERT INTO categories (name)
 VALUES
-    ('Drupes'),
-    ('Berries'),
-    ('Pomes');
+    ('drupes'),
+    ('berries'),
+    ('pomes');
 
 CREATE TABLE items (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
@@ -22,9 +22,9 @@ CREATE TABLE items (
 
 INSERT INTO items (name, price, categoryId)
 VALUES
-    ('Peaches', 15, 1),
-    ('Strawberry', 22, 2),
-    ('Apple', 10, 3);
+    ('peaches', 15, 1),
+    ('strawberry', 22, 2),
+    ('apple', 10, 3);
 `;
 
 async function main() {

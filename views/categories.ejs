@@ -1,0 +1,20 @@
+<link rel="stylesheet" href="style.css" />
+<title>Categories</title>
+<%- include('navbar') %>
+<div class="add-button">
+	<a href="/categories/create">
+		<button>Add Category</button>
+	</a>
+</div>
+<div class="categories">
+	<% categories.forEach((category) => { %>
+	<a href="/categories/<%= category.name %>">
+		<div class="category">
+			<img src="<%= category.name %>.jpg" alt="" />
+			<h3><%= category.name %></h3>
+		</div>
+	</a>
+	<% }) %>
+</div>
+
+<%- include('footer') %>

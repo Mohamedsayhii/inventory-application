@@ -1,7 +1,7 @@
 const db = require('../database/queries');
 
 async function getCategories(req, res) {
-	const categories = db.getAllCategories();
+	const categories = await db.getAllCategories();
 	res.render('categories', { categories: categories });
 }
 
