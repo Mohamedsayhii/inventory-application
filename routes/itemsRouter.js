@@ -9,6 +9,6 @@ const itemsRouter = Router();
 
 itemsRouter.get('/', getItems);
 itemsRouter.get('/create', createItemGet);
-itemsRouter.post('create', createItemPost);
+itemsRouter.post('/create', createItemPost);
 
 module.exports = itemsRouter;
