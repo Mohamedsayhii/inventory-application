@@ -1,0 +1,15 @@
+<title>New Category</title>
+<link rel="icon" href="/icon.png" type="image/png" />
+<link rel="stylesheet" href="/style.css" />
+<%- include('navbar') %>
+<form action="/categories/create" method="post">
+	<input
+		type="text"
+		name="categoryName"
+		id="categoryName"
+		placeholder="Category Name"
+		class="form-input"
+	/>
+	<button type="submit">Add Category</button>
+</form>
+<%- include('footer') %>
