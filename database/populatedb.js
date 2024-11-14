@@ -23,8 +23,13 @@ CREATE TABLE items (
 INSERT INTO items (name, price, categoryId)
 VALUES
     ('peaches', 15, 1),
+    ('almonds', 6, 1),
     ('strawberry', 22, 2),
-    ('apple', 10, 3);
+    ('apple', 10, 3),
+    ('bananas', 22, 2),
+    ('cherry', 7, 2),
+    ('grapes', 5, 2),
+    ('pears', 12, 3);
 `;
 
 async function main() {

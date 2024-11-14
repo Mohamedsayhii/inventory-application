@@ -5,6 +5,15 @@ async function getCategories(req, res) {
 	res.render('categories', { categories: categories });
 }
 
+async function getCategory(req, res) {
+	const { categoryName } = req.params;
+	const categoryItems = await db.getCategory(categoryName);
+	res.render('category', {
+		categoryName: categoryName[0].toUpperCase() + categoryName.substr(1),
+		categoryItems: categoryItems,
+	});
+}
+
 async function createCategoryGet(req, res) {
 	res.render('categoryForm', { title: 'Create Category' });
 }
@@ -15,4 +24,9 @@ async function createCategoryPost(req, res) {
 	res.redirect('/categories');
 }
 
-module.exports = { getCategories, createCategoryGet, createCategoryPost };
+module.exports = {
+	getCategories,
+	getCategory,
+	createCategoryGet,
+	createCategoryPost,
+};
