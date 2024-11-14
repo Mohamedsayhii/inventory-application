@@ -6,7 +6,8 @@ async function getItems(req, res) {
 }
 
 async function createItemGet(req, res) {
-	res.render('itemForm', { title: 'Create Item' });
+	const categories = await db.getAllCategories();
+	res.render('itemForm', { categories: categories });
 }
 
 async function createItemPost(req, res) {

@@ -1,0 +1,28 @@
+<title>New Item</title>
+<link rel="icon" href="/icon.png" type="image/png" />
+<link rel="stylesheet" href="/style.css" />
+<%- include('navbar') %>
+<form action="/items/create" method="post">
+	<input
+		type="text"
+		name="name"
+		id="name"
+		placeholder="Fruit Name"
+		class="form-input"
+	/>
+	<input
+		type="text"
+		name="price"
+		id="price"
+		placeholder="Fruit Price per KG"
+		class="form-input"
+	/>
+	<select name="categoryName" id="type-select" class="form-input">
+		<option value="">Please choose a type</option>
+		<% categories.forEach((category) => { %>
+		<option value="<%= category.name %>"><%= category.name %></option>
+		<% }) %>
+	</select>
+	<button type="submit">Add Item</button>
+</form>
+<%- include('footer') %>
