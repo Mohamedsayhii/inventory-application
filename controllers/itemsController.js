@@ -16,4 +16,10 @@ async function createItemPost(req, res) {
 	res.redirect('/items');
 }
 
-module.exports = { getItems, createItemGet, createItemPost };
+async function deleteItemPost(req, res) {
+	const { itemName } = req.params;
+	await db.deleteItem(itemName);
+	res.redirect('/items');
+}
+
+module.exports = { getItems, createItemGet, createItemPost, deleteItemPost };

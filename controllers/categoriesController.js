@@ -24,9 +24,16 @@ async function createCategoryPost(req, res) {
 	res.redirect('/categories');
 }
 
+async function deleteCategoryPost(req, res) {
+	const { categoryName } = req.params;
+	await db.deleteCategory(categoryName);
+	res.redirect('/categories');
+}
+
 module.exports = {
 	getCategories,
 	getCategory,
 	createCategoryGet,
 	createCategoryPost,
+	deleteCategoryPost,
 };

@@ -33,10 +33,26 @@ async function insertItem(itemName, price, categoryName) {
 	);
 }
 
+async function deleteCategory(categoryName) {
+	await pool.query(
+		'DELETE FROM items WHERE categoryId = (SELECT id FROM categories WHERE name = ($1))',
+		[categoryName]
+	);
+	await pool.query('DELETE FROM categories WHERE name = ($1)', [
+		categoryName,
+	]);
+}
+
+async function deleteItem(itemName) {
+	await pool.query('DELETE FROM items WHERE name = ($1)', [itemName]);
+}
+
 module.exports = {
 	getAllCategories,
 	getCategory,
 	insertCategory,
 	getAllItems,
 	insertItem,
+	deleteCategory,
+	deleteItem,
 };
