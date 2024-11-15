@@ -58,11 +58,11 @@ main h1 {
 .add-button {
 	display: flex;
 	justify-content: center;
-	margin-top: 5rem;
+	margin: 4rem 0;
 }
 
 .categories {
-	margin: 5rem 0;
+	margin-bottom: 5rem;
 	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
@@ -78,17 +78,39 @@ main h1 {
 .category {
 	display: flex;
 	flex-direction: column;
-	gap: 1rem;
 	text-align: center;
 	font-size: large;
 	font-weight: bold;
 	text-transform: capitalize;
 }
 
+.item-details {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+}
+
 .category img {
 	width: 200px;
 	height: 200px;
 	border-radius: 1rem;
+}
+
+.category button {
+	width: 9rem;
+}
+
+.edit-delete-buttons {
+	display: flex;
+	text-align: center;
+	justify-content: center;
+	gap: 0.5rem;
+}
+
+.edit-delete-buttons form {
+	height: auto;
+	padding: 0rem;
 }
 
 form {

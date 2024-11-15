@@ -11,8 +11,27 @@
 	<% items.forEach((item) => { %>
 	<div class="category">
 		<img src="<%= item.name %>.jpg" alt="" />
-		<h3><%= item.name %></h3>
-		<p><%= item.price %>$/KG</p>
+		<div class="item-details">
+			<h3><%= item.name %></h3>
+			<p><%= item.price %>$/KG</p>
+		</div>
+		<div class="edit-delete-buttons">
+			<a href="/items/<%= item.name %>">
+				<button>Edit</button>
+			</a>
+			<form
+				action="/items/<%= item.name %>/delete"
+				method="post"
+				style="display: inline"
+			>
+				<button
+					type="submit"
+					onclick="return confirm('Are you sure you want to delete this item?');"
+				>
+					Delete
+				</button>
+			</form>
+		</div>
 	</div>
 	<% }) %>
 </div>
