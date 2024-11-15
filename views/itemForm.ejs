@@ -1,28 +1,64 @@
 <title>New Item</title>
 <link rel="icon" href="/icon.png" type="image/png" />
 <link rel="stylesheet" href="/style.css" />
-<%- include('navbar') %>
-<form action="/items/create" method="post">
-	<input
-		type="text"
-		name="name"
-		id="name"
-		placeholder="Fruit Name"
-		class="form-input"
-	/>
-	<input
-		type="text"
-		name="price"
-		id="price"
-		placeholder="Fruit Price per KG"
-		class="form-input"
-	/>
-	<select name="categoryName" id="type-select" class="form-input">
-		<option value="">Please choose a type</option>
-		<% categories.forEach((category) => { %>
-		<option value="<%= category.name %>"><%= category.name %></option>
-		<% }) %>
-	</select>
-	<button type="submit">Add Item</button>
-</form>
-<%- include('footer') %>
+<%- include('navbar') %> <% if (item) { %>
+<div class="form-element">
+	<form action="/items/<%=item.name%>/edit" method="post">
+		<input
+			type="text"
+			name="newItemName"
+			id="newItemName"
+			placeholder="Fruit Name"
+			class="form-input"
+			value="<%= item.name %>"
+		/>
+		<input
+			type="text"
+			name="newItemPrice"
+			id="newItemPrice"
+			placeholder="Fruit Price per KG"
+			class="form-input"
+			value="<%= item.price %>"
+		/>
+		<select name="newItemCategory" id="type-select" class="form-input">
+			<% categories.forEach((category) => { %> <% if(category.name
+			===item.category) { %>
+			<option selected value="<%= category.name %>">
+				<%= category.name %>
+			</option>
+			<% } else { %>
+			<option value="<%= category.name %>"><%= category.name %></option>
+			<% } %> <% }) %>
+		</select>
+		<button type="submit">Edit Item</button>
+	</form>
+	<a href="/items"><button>Cancel</button></a>
+</div>
+<% } else { %>
+<div class="form-element">
+	<form action="/items/create" method="post">
+		<input
+			type="text"
+			name="name"
+			id="name"
+			placeholder="Fruit Name"
+			class="form-input"
+		/>
+		<input
+			type="text"
+			name="price"
+			id="price"
+			placeholder="Fruit Price per KG"
+			class="form-input"
+		/>
+		<select name="categoryName" id="type-select" class="form-input">
+			<option value="">Please choose a type</option>
+			<% categories.forEach((category) => { %>
+			<option value="<%= category.name %>"><%= category.name %></option>
+			<% }) %>
+		</select>
+		<button type="submit">Add Item</button>
+	</form>
+	<a href="/items"><button>Back</button></a>
+</div>
+<% } %> <%- include('footer') %>

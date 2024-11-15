@@ -1,15 +1,33 @@
 <title>New Category</title>
 <link rel="icon" href="/icon.png" type="image/png" />
 <link rel="stylesheet" href="/style.css" />
-<%- include('navbar') %>
-<form action="/categories/create" method="post">
-	<input
-		type="text"
-		name="categoryName"
-		id="categoryName"
-		placeholder="Category Name"
-		class="form-input"
-	/>
-	<button type="submit">Add Category</button>
-</form>
-<%- include('footer') %>
+<%- include('navbar') %> <% if (!category) { %>
+<div class="form-element">
+	<form action="/categories/create" method="post">
+		<input
+			type="text"
+			name="categoryName"
+			id="categoryName"
+			placeholder="Category Name"
+			class="form-input"
+		/>
+		<button type="submit">Add Category</button>
+	</form>
+	<a href="/categories"><button>Back</button></a>
+</div>
+<% } else { %>
+<div class="form-element">
+	<form action="/categories/<%= category.name %>/edit" method="post">
+		<input
+			type="text"
+			name="newCategoryName"
+			id="newCategoryName"
+			placeholder="Category Name"
+			class="form-input"
+			value="<%= category.name %>"
+		/>
+		<button type="submit">Edit Category</button>
+	</form>
+	<a href="/categories"><button>Cancel</button></a>
+</div>
+<% } %> <%- include('footer') %>

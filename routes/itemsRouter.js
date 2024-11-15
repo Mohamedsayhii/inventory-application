@@ -4,6 +4,8 @@ const {
 	createItemGet,
 	createItemPost,
 	deleteItemPost,
+	editItemGet,
+	editItemPost,
 } = require('../controllers/itemsController');
 
 const itemsRouter = Router();
@@ -11,8 +13,8 @@ const itemsRouter = Router();
 itemsRouter.get('/', getItems);
 itemsRouter.get('/create', createItemGet);
 itemsRouter.post('/create', createItemPost);
-// itemsRouter.get('/:itemName', editItemGet);
-// itemsRouter.post('/:itemName', editItemPost);
+itemsRouter.get('/:itemName/edit', editItemGet);
+itemsRouter.post('/:itemName/edit', editItemPost);
 itemsRouter.post('/:itemName/delete', deleteItemPost);
 
 module.exports = itemsRouter;

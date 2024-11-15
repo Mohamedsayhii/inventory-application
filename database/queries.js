@@ -5,10 +5,31 @@ async function getAllCategories() {
 	return rows;
 }
 
-async function getCategory(categoryName) {
+async function getAllItems() {
+	const { rows } = await pool.query('SELECT name, price FROM items');
+	return rows;
+}
+
+async function getCategoryItems(categoryName) {
 	const { rows } = await pool.query(
 		'SELECT items.name, items.price FROM items INNER JOIN categories ON items.categoryId = categories.id WHERE categories.name = ($1)',
 		[categoryName]
+	);
+	return rows;
+}
+
+async function getCategory(categoryName) {
+	const { rows } = await pool.query(
+		'SELECT name FROM categories WHERE name = ($1)',
+		[categoryName]
+	);
+	return rows;
+}
+
+async function getItem(itemName) {
+	const { rows } = await pool.query(
+		'SELECT items.name, items.price, categories.name AS category FROM items JOIN categories ON items.categoryId = categories.id WHERE items.name = ($1)',
+		[itemName]
 	);
 	return rows;
 }
@@ -19,15 +40,24 @@ async function insertCategory(categoryName) {
 	]);
 }
 
-async function getAllItems() {
-	const { rows } = await pool.query('SELECT name, price FROM items');
-	return rows;
-}
-
 async function insertItem(itemName, price, categoryName) {
 	await pool.query(
 		'INSERT INTO items (name, price, categoryId) VALUES ($1, $2, (SELECT id FROM categories WHERE name = ($3)))',
 		[itemName, price, categoryName]
+	);
+}
+
+async function editCategory(newCategoryName, categoryName) {
+	await pool.query('UPDATE categories SET name = ($1) WHERE name = ($2)', [
+		newCategoryName,
+		categoryName,
+	]);
+}
+
+async function editItem(newItemName, newItemPrice, newItemCategory, itemName) {
+	await pool.query(
+		'UPDATE items SET name = ($1), price = ($2), categoryId = (SELECT id FROM categories WHERE name = ($3)) WHERE name = ($4)',
+		[newItemName, newItemPrice, newItemCategory, itemName]
 	);
 }
 
@@ -47,10 +77,14 @@ async function deleteItem(itemName) {
 
 module.exports = {
 	getAllCategories,
-	getCategory,
-	insertCategory,
 	getAllItems,
+	getCategory,
+	getItem,
+	getCategoryItems,
+	insertCategory,
 	insertItem,
+	editCategory,
+	editItem,
 	deleteCategory,
 	deleteItem,
 };

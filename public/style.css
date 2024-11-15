@@ -82,6 +82,7 @@ main h1 {
 	font-size: large;
 	font-weight: bold;
 	text-transform: capitalize;
+	gap: 0.5rem;
 }
 
 .item-details {
@@ -108,12 +109,12 @@ main h1 {
 	gap: 0.5rem;
 }
 
-.edit-delete-buttons form {
+.edit-delete-buttons .form-element {
 	height: auto;
 	padding: 0rem;
 }
 
-form {
+.form-element {
 	height: 80vh;
 	padding: 3rem;
 	display: flex;
@@ -122,7 +123,7 @@ form {
 	align-items: center;
 }
 
-form * {
+.form-element form * {
 	margin-bottom: 1rem;
 }
 
