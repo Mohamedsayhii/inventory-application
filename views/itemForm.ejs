@@ -1,26 +1,35 @@
-<title>New Item</title>
+<title><%= title %></title>
 <link rel="icon" href="/icon.png" type="image/png" />
 <link rel="stylesheet" href="/style.css" />
 <%- include('navbar') %> <% if (item) { %>
 <div class="form-element">
+	<%- include("errors.ejs") %>
 	<form action="/items/<%=item.name%>/edit" method="post">
 		<input
 			type="text"
-			name="newItemName"
-			id="newItemName"
+			name="itemName"
+			id="itemName"
 			placeholder="Fruit Name"
 			class="form-input"
 			value="<%= item.name %>"
+			required
 		/>
 		<input
-			type="text"
-			name="newItemPrice"
-			id="newItemPrice"
+			type="number"
+			name="itemPrice"
+			id="itemPrice"
 			placeholder="Fruit Price per KG"
 			class="form-input"
 			value="<%= item.price %>"
+			min="1"
+			required
 		/>
-		<select name="newItemCategory" id="type-select" class="form-input">
+		<select
+			name="itemCategory"
+			id="type-select"
+			class="form-input"
+			required
+		>
 			<% categories.forEach((category) => { %> <% if(category.name
 			===item.category) { %>
 			<option selected value="<%= category.name %>">
@@ -36,22 +45,30 @@
 </div>
 <% } else { %>
 <div class="form-element">
+	<%- include("errors.ejs") %>
 	<form action="/items/create" method="post">
 		<input
 			type="text"
-			name="name"
-			id="name"
+			name="itemName"
+			id="itemName"
 			placeholder="Fruit Name"
 			class="form-input"
+			required
 		/>
 		<input
 			type="text"
-			name="price"
-			id="price"
+			name="itemPrice"
+			id="itemPrice"
 			placeholder="Fruit Price per KG"
 			class="form-input"
+			required
 		/>
-		<select name="categoryName" id="type-select" class="form-input">
+		<select
+			name="itemCategory"
+			id="type-select"
+			class="form-input"
+			required
+		>
 			<option value="">Please choose a type</option>
 			<% categories.forEach((category) => { %>
 			<option value="<%= category.name %>"><%= category.name %></option>

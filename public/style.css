@@ -189,5 +189,6 @@ a {
 	text-decoration: none;
 }
 
-@media screen and (max-width: 800px) {
+.errors {
+	margin-bottom: 1rem;
 }

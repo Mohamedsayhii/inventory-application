@@ -1,8 +1,9 @@
-<title>New Category</title>
+<title><%= title %></title>
 <link rel="icon" href="/icon.png" type="image/png" />
 <link rel="stylesheet" href="/style.css" />
 <%- include('navbar') %> <% if (!category) { %>
 <div class="form-element">
+	<%- include("errors.ejs") %>
 	<form action="/categories/create" method="post">
 		<input
 			type="text"
@@ -10,6 +11,7 @@
 			id="categoryName"
 			placeholder="Category Name"
 			class="form-input"
+			required
 		/>
 		<button type="submit">Add Category</button>
 	</form>
@@ -17,14 +19,16 @@
 </div>
 <% } else { %>
 <div class="form-element">
+	<%- include("errors.ejs") %>
 	<form action="/categories/<%= category.name %>/edit" method="post">
 		<input
 			type="text"
-			name="newCategoryName"
-			id="newCategoryName"
+			name="categoryName"
+			id="categoryName"
 			placeholder="Category Name"
 			class="form-input"
 			value="<%= category.name %>"
+			required
 		/>
 		<button type="submit">Edit Category</button>
 	</form>

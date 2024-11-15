@@ -1,4 +1,15 @@
 const db = require('../database/queries');
+const { body, validationResult } = require('express-validator');
+
+const alphaErr = 'must only contain letters.';
+
+validateCategory = [
+	body('categoryName')
+		.notEmpty()
+		.trim()
+		.isAlpha()
+		.withMessage(`Category ${alphaErr}`),
+];
 
 async function getCategories(req, res) {
 	const categories = await db.getAllCategories();
@@ -22,6 +33,14 @@ async function createCategoryGet(req, res) {
 }
 
 async function createCategoryPost(req, res) {
+	const errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		return res.status(404).render('categoryForm', {
+			category: undefined,
+			errors: errors.array(),
+		});
+	}
+
 	const { categoryName } = req.body;
 	await db.insertCategory(categoryName);
 	res.redirect('/categories');
@@ -34,8 +53,19 @@ async function editCategoryGet(req, res) {
 }
 
 async function editCategoryPost(req, res) {
-	const { newCategoryName } = req.body;
-	await db.editCategory(newCategoryName, req.params.categoryName);
+	const errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		const { categoryName } = req.params;
+		const [category] = await db.getCategory(categoryName);
+		return res.status(404).render('categoryForm', {
+			category: category,
+			title: 'Edit Category',
+			errors: errors.array(),
+		});
+	}
+
+	const { categoryName } = req.body;
+	await db.editCategory(categoryName, req.params.categoryName);
 	res.redirect('/categories');
 }
 
@@ -46,6 +76,7 @@ async function deleteCategoryPost(req, res) {
 }
 
 module.exports = {
+	validateCategory,
 	getCategories,
 	getCategoryItems,
 	createCategoryGet,
