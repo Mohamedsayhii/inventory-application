@@ -25,11 +25,9 @@ async function getAllItems() {
 }
 
 async function insertItem(itemName, price, categoryName) {
-	const categoryId =
-		categoryName === 'drupes' ? 1 : categoryName === 'berries' ? 2 : 3;
 	await pool.query(
-		'INSERT INTO items (name, price, categoryId) VALUES ($1, $2, $3)',
-		[itemName, price, categoryId]
+		'INSERT INTO items (name, price, categoryId) VALUES ($1, $2, (SELECT id FROM categories WHERE name = ($3)))',
+		[itemName, price, categoryName]
 	);
 }
 
