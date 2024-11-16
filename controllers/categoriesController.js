@@ -35,8 +35,9 @@ async function createCategoryGet(req, res) {
 async function createCategoryPost(req, res) {
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
-		return res.status(404).render('categoryForm', {
+		return res.status(400).render('categoryForm', {
 			category: undefined,
+			title: 'Create Category',
 			errors: errors.array(),
 		});
 	}
@@ -57,7 +58,7 @@ async function editCategoryPost(req, res) {
 	if (!errors.isEmpty()) {
 		const { categoryName } = req.params;
 		const [category] = await db.getCategory(categoryName);
-		return res.status(404).render('categoryForm', {
+		return res.status(400).render('categoryForm', {
 			category: category,
 			title: 'Edit Category',
 			errors: errors.array(),
