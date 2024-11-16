@@ -32,8 +32,8 @@ VALUES
     ('pears', 12, 3);
 `;
 
-async function main() {
-	console.log('seeding...');
+async function localDB() {
+	console.log('local seeding...');
 	const client = new Client({
 		connectionString:
 			'postgresql://mohamedsayhi:123456789@localhost:5432/inventory',
@@ -41,7 +41,20 @@ async function main() {
 	await client.connect();
 	await client.query(SQL);
 	await client.end();
-	console.log('done');
+	console.log('local done');
 }
 
-main();
+async function cloudDB() {
+	console.log('cloud seeding...');
+	const client = new Client({
+		connectionString:
+			'postgresql://postgres:AbrhAHCLxyMaLXeQOeiYtWzfxntNfTDE@junction.proxy.rlwy.net:19731/railway',
+	});
+	await client.connect();
+	await client.query(SQL);
+	await client.end();
+	console.log('cloud done');
+}
+
+localDB();
+cloudDB();
